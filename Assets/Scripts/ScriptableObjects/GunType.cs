@@ -26,8 +26,8 @@ public class GunType : ScriptableObject
     public Vector3 ModelScale = Vector3.one;    // The scale to apply to the gun model when instantiated
 
     [Header("VFX")]
-    public ParticleSystem FireVFX;              // Particle system for muzzle flash
-    public ParticleSystem ShellVFX;             // Particle system for shell ejection
+    public GameObject FireVFX;                  // Prefab with particle system for muzzle flash
+    public GameObject ShellVFX;                 // Prefab with particle system for shell ejection
 
     [Header("SFX")]
     public AudioClip FireSFX;                   // Sound played when firing

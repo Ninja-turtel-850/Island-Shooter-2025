@@ -61,16 +61,16 @@ public class Gun : MonoBehaviour, IPickupable
         // Set up Particle Systems
         if (GunType.FireVFX != null)
         {
-            Transform fireVFXTransform = new GameObject("FireVFX").transform;
+            FireVFX = Instantiate(GunType.FireVFX, transform).GetComponent<ParticleSystem>();
+            Transform fireVFXTransform = FireVFX.transform;
             fireVFXTransform.SetParent(transform, false);
             fireVFXTransform.SetLocalPositionAndRotation(transform.rotation * GunType.ShootOffset, Quaternion.identity);
-            FireVFX = Instantiate(GunType.FireVFX, fireVFXTransform);
         }
         else 
             Debug.LogWarning("GunType FireVFX is not set, no muzzle flash will be played");
 
         if (GunType.ShellVFX != null)
-            ShellVFX = Instantiate(GunType.ShellVFX, transform);
+            ShellVFX = Instantiate(GunType.ShellVFX, transform).GetComponent<ParticleSystem>();
         else
             Debug.LogWarning("GunType ShellVFX is not set, no shell ejection will be played");
 

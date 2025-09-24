@@ -28,7 +28,7 @@ MonoBehaviour:
   ModelOffset: {x: -0.13, y: -0.03, z: -0.45}
   ModelRotation: {x: 0, y: 0, z: 0}
   ModelScale: {x: 0.3, y: 0.3, z: 0.3}
-  FireVFX: {fileID: 0}
+  FireVFX: {fileID: 100000, guid: ab2a85ac630a7f043acabe652f729dc6, type: 3}
   ShellVFX: {fileID: 0}
-  FireSFX: {fileID: 0}
-  ReloadSFX: {fileID: 0}
+  FireSFX: {fileID: 8300000, guid: a7e51c160bde49742bfee8b8fa3e57a3, type: 3}
+  ReloadSFX: {fileID: 8300000, guid: e71d63c321fd43f4aac081b8c2ddcde8, type: 3}
