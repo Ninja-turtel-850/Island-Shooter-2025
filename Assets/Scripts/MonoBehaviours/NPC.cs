@@ -18,23 +18,13 @@ public class NPC : MonoBehaviour, IDamageable
 
     protected void Start()
     {
+        Health = NpcType.Health;
+        Speed = NpcType.WalkSpeed;
+
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        if (NavMeshAgent == null)
-        {
-            NavMeshAgent = gameObject.GetOrAddComponent<NavMeshAgent>();
-        }
-    }
-
-    protected void FixedUpdate()
-    {
-        NavigationUpdateInterval -= Time.fixedDeltaTime;
-        if (NavigationUpdateInterval <= 0)
-        {
-            SetTargetPositionAndNavigate(TargetPosition);
-            NavigationUpdateInterval = NpcType.NavigationUpdateInterval;
-        }
+        NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();
     }
 
     protected void SetTargetPositionAndNavigate(Vector3 targetPosition)

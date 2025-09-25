@@ -8,4 +8,5 @@ public class NPCType : ScriptableObject
     public float RunSpeed;
     public int Health;
     public float NavigationUpdateInterval;
+    public LayerMask Player;
 }
