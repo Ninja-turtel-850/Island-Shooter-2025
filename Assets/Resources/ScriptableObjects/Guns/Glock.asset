@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec3f3aed3acccc469631ac06dfdfbaf, type: 3}
+  m_Name: Glock
+  m_EditorClassIdentifier: 
+  AmmoCapacity: 12
+  FireTime: 0.35
+  BurstTime: 0
+  ReloadTime: 1.5
+  BulletsPerShot: 1
+  Recoil: 0
+  Inacuracy: 1.5
+  IsAutomatic: 0
+  IsBurstOneAmmo: 0
+  ShootOffset: {x: -0.13, y: 0.09, z: -0.25}
+  BulletType: {fileID: 11400000, guid: 6f701bd841728294ba5ebb8fb583839e, type: 2}
+  Mesh: {fileID: -7182689631186222527, guid: 16f7e965479f7024ca03f47b9ee4af80, type: 3}
+  Material: {fileID: 2100000, guid: 1e3079d048662f54e9ae0c18f644dfea, type: 2}
+  ModelOffset: {x: -0.13, y: -0.03, z: -0.45}
+  ModelRotation: {x: 0, y: 0, z: 0}
+  ModelScale: {x: 0.3, y: 0.3, z: 0.3}
+  FireVFX: {fileID: 0}
+  ShellVFX: {fileID: 0}
+  FireSFX: {fileID: 0}
+  ReloadSFX: {fileID: 0}
