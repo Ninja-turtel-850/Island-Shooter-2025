@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
 {
     private Dictionary<BulletType, int> AmmoAmount = new();
-    public Gun Gun;
+    public Gun ActiveGun { get { return Guns[CurrentGunIndex]; } }
+    public Gun[] Guns = new Gun[2];
+    public int CurrentGunIndex = 0;
+
     public Grabber Grabber;
 
     [SerializeField] private TMPro.TextMeshProUGUI pickupPrompt;
@@ -15,25 +17,26 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
 
     void Start()
     {
-        // Debuging only, should be removed later
-        Gun.Pickup(transform);
-        AmmoAmount[Gun.Type.BulletType] = 40;
+
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (ActiveGun != null)
         {
-            Gun.StartShooting();
+            if (Input.GetMouseButtonDown(0))
+                ActiveGun.StartShooting();
+            if (Input.GetMouseButtonUp(0))
+                ActiveGun.StopShooting();
+            if (Input.GetKeyDown(KeyCode.R))
+                ActiveGun.Reload();
         }
-        if (Input.GetMouseButtonUp(0))
-        {
-            Gun.StopShooting();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Gun.Reload();
-        }
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
+            SwitchGun(0);
+        if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
+            SwitchGun(1);
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+            SwitchGun(CurrentGunIndex + (Input.GetAxis("Mouse ScrollWheel") > 0 ? 1 : -1));
 
         // Could probably be optimized but it's fine for a testing script
         Grabber.Position = Camera.main.transform.position;
@@ -49,7 +52,24 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
                 FadeInPickupRoutine = StartCoroutine(FadeInPickupUi());
 
             if (Input.GetKeyDown(KeyCode.E))
+            {
                 pickupable.Pickup(transform);
+                // Check if the pickupable is a Gun
+                if (pickupable is Gun gun)
+                {
+                    // If we already have a gun in the current slot, drop it
+                    if (ActiveGun != null)
+                    {
+                        ActiveGun.transform.SetParent(null, true);
+                        ActiveGun.Drop();
+                    }
+                    // Equip the new gun
+                    Guns[CurrentGunIndex] = gun;
+                    gun.transform.SetParent(Camera.main.transform);
+                    gun.transform.localPosition = new Vector3(0.644f, -0.302f, 1.167f); // Hardcoded for now
+                    gun.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                }
+            }
         }
         else
         {
@@ -80,6 +100,15 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
             GUI.Box(new Rect(10, y, 200, 30), $"{ammo.Key.Name}: {ammo.Value}", style);
             y += 40;
         }
+    }
+
+    private void SwitchGun(int index)
+    {
+        if (index < 0 || index >= Guns.Length || index == CurrentGunIndex) return;
+
+        if (ActiveGun != null) ActiveGun.gameObject.SetActive(false);
+        CurrentGunIndex = index;
+        if (ActiveGun != null) ActiveGun.gameObject.SetActive(true);
     }
 
     private IEnumerator FadeInPickupUi()
