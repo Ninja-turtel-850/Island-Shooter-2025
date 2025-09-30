@@ -33,7 +33,7 @@ public class Guard : Enemy
                 Target = (Vector3)seenPosition;
                 SwitchState(State.Chase);
             }
-            else if (state == State.Chase)
+            else if (!SeesPlayer && (state == State.Chase || state == State.Attack))
                 SwitchState(State.Alert);
         }
 
@@ -47,6 +47,9 @@ public class Guard : Enemy
                 break;
             case State.Chase:
                 ChaseState();
+                break;
+            case State.Attack:
+                AttackState();
                 break;
         }
     }
@@ -68,9 +71,17 @@ public class Guard : Enemy
         // Stay alert until the last known player position is reached
         if (!IsAtNavigationPoint) return;
 
+        // Turn to look left and right
+        NavMeshAgent.updateRotation = false;
+        float angleOffset = Mathf.PingPong(Time.time * TurnSpeed, MaxTurnAngle * 2) - MaxTurnAngle;
+        Vector3 newRotation = transform.eulerAngles;
+        newRotation.y = angleOffset;
+        transform.eulerAngles = newRotation;
+
         // When the alert timer runs out, return to idle state
         if (AlertTimer <= 0)
         {
+            NavMeshAgent.updateRotation = true;
             Target = home;
             SwitchState(State.Idle);
         }
@@ -79,8 +90,13 @@ public class Guard : Enemy
     private void ChaseState()
     {
         // If the player is in range, shoot
-        if (NavMeshAgent.remainingDistance >= gun.Type.BulletType.Range * 0.9) return;
+        float distance = Vector3.Distance(transform.position, Target);
+        if (distance < enemyType.VisionRange * 0.7 && distance < gun.Type.BulletType.Range)
+            SwitchState(State.Attack);
+    }
 
+    private void AttackState()
+    {
         // Aim at the player
         Vector3 direction = (Target - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
@@ -98,14 +114,34 @@ public class Guard : Enemy
             case State.Idle:
                 Speed = NpcType.WalkSpeed;
                 Target = home;
+                NavMeshAgent.isStopped = false;
                 break;
             case State.Alert:
                 Speed = NpcType.RunSpeed;
+                AlertTimer = enemyType.AlertDuration;
+                NavMeshAgent.isStopped = false;
                 break;
             case State.Chase:
                 Speed = NpcType.RunSpeed;
+                NavMeshAgent.isStopped = false;
+                break;
+            case State.Attack:
+                Speed = 0;
+                NavMeshAgent.isStopped = true;
                 break;
         }
         state = newState;
+    }
+
+    new public void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        if (state == State.Idle)
+        {
+            SwitchState(State.Alert);
+            AlertTimer = enemyType.AlertDuration;
+            TargetPosition = Player.position;
+            SetTargetPositionAndNavigate(TargetPosition);
+        }
     }
 }

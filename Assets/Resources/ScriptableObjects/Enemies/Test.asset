@@ -15,6 +15,8 @@ MonoBehaviour:
   LookInterval: 0.5
   AlertDuration: 10
   VisionRange: 25
-  VisionMaxVertical: 2
-  VisionMaxHorizontal: 2
-  VisionRays: {x: 20, y: 10}
+  VisionMaxVertical: 45
+  VisionMaxHorizontal: 45
+  VisibleLayers:
+    serializedVersion: 2
+    m_Bits: 16497

@@ -66,6 +66,9 @@ public class Patroler : Enemy
             case State.Chase:
                 ChaseState();
                 break;
+            case State.Attack:
+                AttackState();
+                break;
         }
     }
 
@@ -115,8 +118,13 @@ public class Patroler : Enemy
     private void ChaseState()
     {
         // If the player is in range, shoot
-        if (NavMeshAgent.remainingDistance >= gun.Type.BulletType.Range * 0.9) return;
+        float distance = Vector3.Distance(transform.position, Target);
+        if (distance < enemyType.VisionRange * 0.7 && distance < gun.Type.BulletType.Range)
+            SwitchState(State.Attack);
+    }
 
+    private void AttackState()
+    {
         // Aim at the player
         Vector3 direction = (Target - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(direction);
@@ -143,9 +151,26 @@ public class Patroler : Enemy
                 if (state == State.Idle)
                     home = transform.position;
                 break;
+            case State.Attack:
+                Speed = 0;
+                gun.StartShooting();
+                break;
         }
         state = newState;
     }
+
+    new public void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        if (state == State.Idle)
+        {
+            SwitchState(State.Alert);
+            AlertTimer = enemyType.AlertDuration;
+            TargetPosition = Player.position;
+            SetTargetPositionAndNavigate(TargetPosition);
+        }
+    }
+
     new void OnDrawGizmos()
     {
         base.OnDrawGizmos();

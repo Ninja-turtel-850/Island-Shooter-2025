@@ -11,5 +11,6 @@ public class EnemyType : ScriptableObject
     public float VisionRange;                   // Max lenght of the raycasts
     public float VisionMaxVertical;             // Max vertical angle the enemy can see
     public float VisionMaxHorizontal;           // Max horizontal angle the enemy can see
-    public Vector2Int VisionRays;               // Amount of rays to shoot in each direction
+    public LayerMask VisibleLayers;             // All layers the enemy can see
+
 }

@@ -8,6 +8,7 @@ public class NPC : MonoBehaviour, IDamageable
     [SerializeField] protected NPCType NpcType;
     [SerializeField] protected int Health;
     [SerializeField] protected float Speed;
+    [SerializeField] protected Transform Player;
 
     [Header("NavMesh Properties")]
     [SerializeField] protected NavMeshAgent NavMeshAgent;
@@ -20,6 +21,7 @@ public class NPC : MonoBehaviour, IDamageable
     {
         Health = NpcType.Health;
         Speed = NpcType.WalkSpeed;
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -35,7 +37,7 @@ public class NPC : MonoBehaviour, IDamageable
         NavMeshAgent.speed = Speed;
     }
 
-    private void Die()
+    protected void Die()
     {
         Destroy(gameObject);
     }
