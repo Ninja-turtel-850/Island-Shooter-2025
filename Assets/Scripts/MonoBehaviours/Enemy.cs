@@ -104,7 +104,7 @@ public class Enemy : NPC, IAmmoHolder
             Gizmos.color = new Color32(0, 0, 0, 0);
         else
             Gizmos.color = new Color32(255, 255, 0, 98);
-        Gizmos.DrawSphere(transform.position, enemyType.VisionRange);
+        //Gizmos.DrawSphere(transform.position, enemyType.VisionRange);
 
 
         // Draw vision viewport
