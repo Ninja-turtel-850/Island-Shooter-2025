@@ -7314,6 +7314,7 @@ GameObject:
   - component: {fileID: 1120700274}
   - component: {fileID: 1120700273}
   - component: {fileID: 1120700272}
+  - component: {fileID: 1120700276}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -7413,6 +7414,25 @@ Transform:
   - {fileID: 1620819228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1120700276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120700271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a8bbb83c0380543bc4a0df7ff6b17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Gun: {fileID: 0}
+  Grabber: {fileID: 0}
+  pickupPrompt: {fileID: 0}
+  maxHealth: 7
+  currentHealth: 6
+  maxOverlayAlpha: 0.7
+  startOverlayAlpha: 0.05
 --- !u!1001 &1126403656
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -26,8 +26,6 @@ public class Gun : MonoBehaviour, IPickupable
     private AudioSource GunAudio;                           // Audio source for gun sounds
     private Coroutine reloadCoroutine;                      // Coroutine reference for reloading
     private Coroutine burstCoroutine;                       // Coroutine reference for burst firing
-    private BoxCollider gunCollider;                        // Collider for the gun, used for picking it up
-    private Rigidbody gunRigidbody;                         // Rigidbody for the gun, used for physics
 
     public GunType Type { get { return GunType; } }
 
@@ -44,12 +42,6 @@ public class Gun : MonoBehaviour, IPickupable
         CurrentAmmo = GunType.AmmoCapacity;
         raycastHits = new RaycastHit[32];
         hitList = new List<RaycastHit>(32);
-
-        // Set up collider and rigidbody
-        gunRigidbody = gameObject.AddComponent<Rigidbody>();
-        gunCollider = gameObject.AddComponent<BoxCollider>();
-        gunCollider.center = GunType.ModelOffset;
-        gunCollider.size = new Vector3(0.3f, 0.3f, 1);
 
         // Set up the gun model
         if (GunType.Mesh != null && GunType.Material)
@@ -69,16 +61,16 @@ public class Gun : MonoBehaviour, IPickupable
         // Set up Particle Systems
         if (GunType.FireVFX != null)
         {
-            FireVFX = Instantiate(GunType.FireVFX, transform).GetComponent<ParticleSystem>();
-            Transform fireVFXTransform = FireVFX.transform;
+            Transform fireVFXTransform = new GameObject("FireVFX").transform;
             fireVFXTransform.SetParent(transform, false);
             fireVFXTransform.SetLocalPositionAndRotation(transform.rotation * GunType.ShootOffset, Quaternion.identity);
+            FireVFX = Instantiate(GunType.FireVFX, fireVFXTransform);
         }
         else 
             Debug.LogWarning("GunType FireVFX is not set, no muzzle flash will be played");
 
         if (GunType.ShellVFX != null)
-            ShellVFX = Instantiate(GunType.ShellVFX, transform).GetComponent<ParticleSystem>();
+            ShellVFX = Instantiate(GunType.ShellVFX, transform);
         else
             Debug.LogWarning("GunType ShellVFX is not set, no shell ejection will be played");
 
@@ -117,11 +109,6 @@ public class Gun : MonoBehaviour, IPickupable
             GunModel.gameObject.layer = LayerMask.NameToLayer("PewPew");
         else
             GunModel.gameObject.layer = LayerMask.NameToLayer("Default");
-
-        // Disable the collider and rigidbody
-        gunCollider.enabled = false;
-        gunRigidbody.isKinematic = true;
-        gunRigidbody.useGravity = false;
     }
 
     // Call when the gun is dropped by a player or NPC
@@ -130,10 +117,6 @@ public class Gun : MonoBehaviour, IPickupable
         ShouldShoot = false;
         IAmmoHolder = null;
         GunModel.gameObject.layer = LayerMask.NameToLayer("Default");
-        // Enable physics
-        gunCollider.enabled = true;
-        gunRigidbody.isKinematic = false;
-        gunRigidbody.useGravity = true;
 
         // Stop any ongoing coroutines
         if (reloadCoroutine != null)

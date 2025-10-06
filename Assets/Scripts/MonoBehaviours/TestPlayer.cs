@@ -1,44 +1,56 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
 {
+    // ===== AMMO & WEAPON SYSTEM =====
     private Dictionary<BulletType, int> AmmoAmount = new();
-    public Gun ActiveGun { get { return Guns[CurrentGunIndex]; } }
-    public Gun[] Guns = new Gun[2];
-    public int CurrentGunIndex = 0;
-
+    public Gun Gun;
     public Grabber Grabber;
 
+    [Header("UI Prompts")]
     [SerializeField] private TMPro.TextMeshProUGUI pickupPrompt;
     private Coroutine FadeInPickupRoutine;
     private Coroutine FadeOutPickupRoutine;
 
+    // ===== HEALTH SYSTEM =====
+    [Header("Health Settings")]
+    [SerializeField] private int maxHealth = 7;
+    [SerializeField] private float currentHealth;
+
+    // ===== DAMAGE OVERLAY =====
+    [Header("Damage Overlay Settings")]
+    [SerializeField] private float maxOverlayAlpha = 0.7f;
+    [SerializeField] private float startOverlayAlpha = 0.3f; // rood bij start
+    private Image damageOverlay;
+
     void Start()
     {
+        // Debugging setup
+        Gun?.Pickup(transform);
+        if (Gun != null)
+            AmmoAmount[Gun.Type.BulletType] = 40;
 
+        currentHealth = maxHealth;
+
+        // Maak het rode overlay aan
+        CreateDamageOverlay();
+        SetOverlayAlpha(startOverlayAlpha);
     }
 
     void Update()
     {
-        if (ActiveGun != null)
-        {
-            if (Input.GetMouseButtonDown(0))
-                ActiveGun.StartShooting();
-            if (Input.GetMouseButtonUp(0))
-                ActiveGun.StopShooting();
-            if (Input.GetKeyDown(KeyCode.R))
-                ActiveGun.Reload();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
-            SwitchGun(0);
-        if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
-            SwitchGun(1);
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-            SwitchGun(CurrentGunIndex + (Input.GetAxis("Mouse ScrollWheel") > 0 ? 1 : -1));
+        // ===== INPUT HANDLING =====
+        if (Input.GetMouseButtonDown(0))
+            Gun?.StartShooting();
+        if (Input.GetMouseButtonUp(0))
+            Gun?.StopShooting();
+        if (Input.GetKeyDown(KeyCode.R))
+            Gun?.Reload();
 
-        // Could probably be optimized but it's fine for a testing script
+        // Pickup logic
         Grabber.Position = Camera.main.transform.position;
         Grabber.Forward = Camera.main.transform.forward;
         if (Grabber.TryGetPickupable(out IPickupable pickupable))
@@ -52,24 +64,7 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
                 FadeInPickupRoutine = StartCoroutine(FadeInPickupUi());
 
             if (Input.GetKeyDown(KeyCode.E))
-            {
                 pickupable.Pickup(transform);
-                // Check if the pickupable is a Gun
-                if (pickupable is Gun gun)
-                {
-                    // If we already have a gun in the current slot, drop it
-                    if (ActiveGun != null)
-                    {
-                        ActiveGun.transform.SetParent(null, true);
-                        ActiveGun.Drop();
-                    }
-                    // Equip the new gun
-                    Guns[CurrentGunIndex] = gun;
-                    gun.transform.SetParent(Camera.main.transform);
-                    gun.transform.localPosition = new Vector3(0.644f, -0.302f, 1.167f); // Hardcoded for now
-                    gun.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                }
-            }
         }
         else
         {
@@ -81,69 +76,77 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
             if (FadeOutPickupRoutine == null)
                 FadeOutPickupRoutine = StartCoroutine(FadeOutPickupUi());
         }
+
+        // Testdamage: toets H verlaagt health
+        if (Input.GetKeyDown(KeyCode.H))
+            TakeDamage(10);
     }
 
-
-    // Debuging only, should be removed later
-    void OnGUI()
+    // ===== DAMAGE SYSTEM =====
+    public void TakeDamage(int damage)
     {
-        // Display ammo count on screen for each ammo type
-        int y = 10;
-        GUIStyle style = new GUIStyle(GUI.skin.box)
-        {
-            fontSize = 24,
-            alignment = TextAnchor.MiddleCenter
-        };
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        foreach (var ammo in AmmoAmount)
-        {
-            GUI.Box(new Rect(10, y, 200, 30), $"{ammo.Key.Name}: {ammo.Value}", style);
-            y += 40;
-        }
+        Debug.Log($"Player took {damage} damage, health = {currentHealth}");
+        UpdateOverlay();
+
+        if (currentHealth <= 0)
+            Die();
     }
 
-    private void SwitchGun(int index)
+    private void Die()
     {
-        if (index < 0 || index >= Guns.Length || index == CurrentGunIndex) return;
-
-        if (ActiveGun != null) ActiveGun.gameObject.SetActive(false);
-        CurrentGunIndex = index;
-        if (ActiveGun != null) ActiveGun.gameObject.SetActive(true);
+        Debug.Log("💀 Player is dead!");
+        // Voeg hier respawn/game over toe
     }
 
-    private IEnumerator FadeInPickupUi()
+    // ===== OVERLAY LOGIC =====
+    private void CreateDamageOverlay()
     {
-        float duration = 0.3f; // Duration of the fade effect
-        float elapsedTime = pickupPrompt.color.a * duration; // Start from the current alpha progress
-        Color originalColor = pickupPrompt.color;
-        pickupPrompt.gameObject.SetActive(true);
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Lerp(0f, 1f, elapsedTime / duration);
-            pickupPrompt.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
-            yield return null;
-        }
-        pickupPrompt.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+        // Forceer altijd een eigen canvas in overlay mode
+        GameObject canvasObj = new GameObject("DamageCanvas");
+        Canvas canvas = canvasObj.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 999; // bovenop alles
+        canvasObj.AddComponent<CanvasScaler>();
+        canvasObj.AddComponent<GraphicRaycaster>();
+
+        // Maak het rode beeld
+        GameObject overlayObj = new GameObject("DamageOverlay");
+        overlayObj.transform.SetParent(canvasObj.transform, false);
+        damageOverlay = overlayObj.AddComponent<Image>();
+        damageOverlay.color = new Color(1f, 0f, 0f, startOverlayAlpha);
+
+        // Fullscreen instellen
+        RectTransform rect = damageOverlay.rectTransform;
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+
+        Debug.Log("✅ Damage overlay aangemaakt");
     }
 
-    private IEnumerator FadeOutPickupUi()
+    private void UpdateOverlay()
     {
-        float duration = 0.1f; // Duration of the fade effect
-        float elapsedTime = (1f - pickupPrompt.color.a) * duration; // Start from the current alpha progress
-        Color originalColor = pickupPrompt.color;
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
-            pickupPrompt.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
-            yield return null;
-        }
-        pickupPrompt.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
-        pickupPrompt.gameObject.SetActive(false);
+        if (damageOverlay == null) return;
+
+        float healthPercent = currentHealth / maxHealth;
+        float alpha = (1f - healthPercent) * maxOverlayAlpha;
+
+        SetOverlayAlpha(alpha);
     }
 
-    // Implementation of IAmmoHolder interface  
+    private void SetOverlayAlpha(float alpha)
+    {
+        if (damageOverlay == null) return;
+        Color c = damageOverlay.color;
+        c.a = alpha;
+        damageOverlay.color = c;
+    }
+
+    // ===== AMMO SYSTEM =====
     public int GetAmmo(BulletType bulletType)
     {
         if (AmmoAmount.TryGetValue(bulletType, out int ammo))
@@ -173,10 +176,55 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
             AmmoAmount[bulletType] = amount;
     }
 
-    // Implementation of IDamageable interface
-
-    public void TakeDamage(int damage)
+    // ===== UI FADE EFFECT =====
+    private IEnumerator FadeInPickupUi()
     {
-        Debug.Log($"Player took {damage} damage");
+        float duration = 0.3f;
+        float elapsedTime = pickupPrompt.color.a * duration;
+        Color originalColor = pickupPrompt.color;
+        pickupPrompt.gameObject.SetActive(true);
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, elapsedTime / duration);
+            pickupPrompt.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+        pickupPrompt.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+    }
+
+    private IEnumerator FadeOutPickupUi()
+    {
+        float duration = 0.1f;
+        float elapsedTime = (1f - pickupPrompt.color.a) * duration;
+        Color originalColor = pickupPrompt.color;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / duration);
+            pickupPrompt.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+        pickupPrompt.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
+        pickupPrompt.gameObject.SetActive(false);
+    }
+
+    // ===== DEBUG GUI =====
+    void OnGUI()
+    {
+        int y = 10;
+        GUIStyle style = new GUIStyle(GUI.skin.box)
+        {
+            fontSize = 24,
+            alignment = TextAnchor.MiddleCenter
+        };
+
+        foreach (var ammo in AmmoAmount)
+        {
+            GUI.Box(new Rect(10, y, 200, 30), $"{ammo.Key.Name}: {ammo.Value}", style);
+            y += 40;
+        }
+
+        GUI.Box(new Rect(10, y, 200, 30), $"Health: {currentHealth}", style);
     }
 }
