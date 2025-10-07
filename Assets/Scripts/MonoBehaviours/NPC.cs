@@ -43,7 +43,7 @@ public class NPC : MonoBehaviour, IDamageable
     }
 
     // IDamageable implementation
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         Health -= damage;
         if (Health <= 0)

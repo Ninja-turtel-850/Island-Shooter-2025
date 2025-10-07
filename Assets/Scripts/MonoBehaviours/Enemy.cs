@@ -84,7 +84,18 @@ public class Enemy : NPC, IAmmoHolder
     {
         gun.transform.SetParent(null, true);
         gun.Drop();
+        Debug.Log("Enemy died");
         base.Die();
+    }
+
+    override public void TakeDamage(int damage)
+    {
+        Debug.Log("Enemy took damage");
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Die();
+        }
     }
 
     // IAmmoHolder implementation. Since enemies have infinite ammo, these functions do nothing :-)
