@@ -37,7 +37,7 @@ public class NPC : MonoBehaviour, IDamageable
         NavMeshAgent.speed = Speed;
     }
 
-    protected void Die()
+    protected virtual void Die()
     {
         Destroy(gameObject);
     }

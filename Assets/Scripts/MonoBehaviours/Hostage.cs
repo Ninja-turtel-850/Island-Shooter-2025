@@ -2,60 +2,28 @@ using UnityEngine;
 
 public class Hostage : NPC
 {
-    [Header("Hostage Properties")]
-    [SerializeField] private Transform player;
-    [SerializeField] private State state;
+    public float followDistance = 2.0f;
+    public float rescueDistance = 2.0f;
 
-    private enum State
-    {
-        Idle,
-        Scared,
-        Following
-    }
 
-    new void Start()
-    {
-        base.Start();
-    }
+    private bool isRescue = false;
 
-    void FixedUpdate()
-    {
-        TargetPosition = player.position;
-        NavigationUpdateInterval -= Time.fixedDeltaTime;
-    }
 
-    private void Update()
+    void Update()
     {
-        switch (state)
+        float CheckDistance = isRescue ? followDistance : rescueDistance;
+        if (Vector3.Distance(transform.position, Player.position) < CheckDistance)
         {
-            case State.Idle:
-                break;
-            case State.Scared:
-                break;
-            case State.Following:
-                if (NavigationUpdateInterval <= 0)
-                {
-                    SetTargetPositionAndNavigate(TargetPosition);
-                    NavigationUpdateInterval = NpcType.NavigationUpdateInterval;
-                }
-                break;
+            SetTargetPositionAndNavigate(Player.position);
+            isRescue = true;
+
         }
+        else isRescue = false;
     }
 
-    private void SwitchState(State newState)
+    override protected void Die()
     {
-        switch (newState)
-        {
-            case State.Idle:
-                NavMeshAgent.isStopped = true;
-                break;
-            case State.Scared:
-                NavMeshAgent.isStopped = true;
-                break;
-            case State.Following:
-                NavMeshAgent.isStopped = false;
-                break;
-        }
-        state = newState;
+        Statistics.Instance.IncrementHostagesDied();
+        base.Die();
     }
 }

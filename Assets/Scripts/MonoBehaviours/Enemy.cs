@@ -84,7 +84,7 @@ public class Enemy : NPC, IAmmoHolder
     {
         gun.transform.SetParent(null, true);
         gun.Drop();
-        Debug.Log("Enemy died");
+        Statistics.Instance.IncrementEnemiesKilled();
         base.Die();
     }
 
