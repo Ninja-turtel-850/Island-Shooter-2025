@@ -3053,75 +3053,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8745370771089298291, guid: 4d933f1006e24274383c535eaeacfe9c, type: 3}
   m_PrefabInstance: {fileID: 217101565}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &220289645
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1157379863}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3.180023
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.45929
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.000030517578
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 32.065308
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.80470985
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.5936684
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -72.836
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      propertyPath: m_Name
-      value: Block1 (14)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1522416794}
-  m_SourcePrefab: {fileID: 100100000, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
---- !u!4 &220289646 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-  m_PrefabInstance: {fileID: 220289645}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &221117010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14980,7 +14911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1020814407}
   - component: {fileID: 1020814406}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15002,7 +14933,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -15018,7 +14949,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: -1.5599976, y: 0, z: -13.609985}
-  m_LocalScale: {x: 100, y: 50, z: 25}
+  m_LocalScale: {x: 100, y: 50, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1443682047}
@@ -17138,14 +17069,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   CurrentGunIndex: 0
-  Gun: {fileID: 0}
-  Grabber: {fileID: 1120700277}
   pickupPrompt: {fileID: 1286337710}
   maxHealth: 7
   currentHealth: 0
   maxOverlayAlpha: 0.7
   startOverlayAlpha: 0
-  startOverlayAlpha: 0.3
 --- !u!114 &1120700277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17987,7 +17915,6 @@ Transform:
   - {fileID: 1620880971}
   - {fileID: 986627207}
   - {fileID: 1945427491}
-  - {fileID: 220289646}
   - {fileID: 1491094809}
   - {fileID: 609069014}
   - {fileID: 303929046}
@@ -22669,7 +22596,7 @@ GameObject:
   - component: {fileID: 1443682045}
   - component: {fileID: 1443682044}
   - component: {fileID: 1443682048}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23899,33 +23826,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: cfba3289afbb54541bdc6938b7ad4c57, type: 3}
---- !u!1 &1522416793 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
-  m_PrefabInstance: {fileID: 220289645}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1522416794
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522416793}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4596239184023814631, guid: 03d778fdca2c6864eb78cfb25bc938ef, type: 3}
 --- !u!1001 &1526805944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24863,7 +24763,6 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a55d3d8527feea8458629b1eaeed855d, type: 2}
-      objectReference: {fileID: 2100000, guid: bde3992f5a9a5d448aad75e50da096de, type: 2}
     - target: {fileID: 919132149155446097, guid: 3bc3dca8c95bdc6439436e18abdfc993, type: 3}
       propertyPath: m_Name
       value: guy
@@ -34744,7 +34643,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 6d063932906942f439b5997ac74c2f5d, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -34763,7 +34661,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -35551,7 +35448,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 57a55702254fe584fb1b1b3e6385d46a, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -35795,7 +35691,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -35883,7 +35778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 6d063932906942f439b5997ac74c2f5d, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -35924,7 +35818,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 57a55702254fe584fb1b1b3e6385d46a, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -36378,7 +36271,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 57a55702254fe584fb1b1b3e6385d46a, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -36739,7 +36631,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -37023,7 +36914,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -37141,7 +37031,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -37856,7 +37745,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 6d063932906942f439b5997ac74c2f5d, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -38140,7 +38028,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -38861,7 +38748,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -39539,7 +39425,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 57a55702254fe584fb1b1b3e6385d46a, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -39763,7 +39648,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -40132,7 +40016,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 6d063932906942f439b5997ac74c2f5d, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -40550,7 +40433,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 57a55702254fe584fb1b1b3e6385d46a, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -40784,7 +40666,6 @@ GameObject:
   - component: {fileID: 5251373381341684556}
   m_Layer: 0
   m_Name: Pieter
-  m_Name: Guard (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40910,7 +40791,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -41737,7 +41617,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 57a55702254fe584fb1b1b3e6385d46a, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -41854,7 +41733,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 6d063932906942f439b5997ac74c2f5d, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
@@ -42674,7 +42552,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunType: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
-  GunType: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
   ShouldShoot: 0
   CurrentAmmo: 0
   FireTimer: 0
