@@ -130,6 +130,7 @@ public class Gun : MonoBehaviour, IPickupable
         ShouldShoot = false;
         IAmmoHolder = null;
         GunModel.gameObject.layer = LayerMask.NameToLayer("Default");
+        gameObject.layer = LayerMask.NameToLayer("Pickupable");
         // Enable physics
         gunCollider.enabled = true;
         gunRigidbody.isKinematic = false;
@@ -271,9 +272,9 @@ public class Gun : MonoBehaviour, IPickupable
     private void SpawnBullet()
     {
         // Calculate inaccuracy
-        Vector2 randomCircle = Random.insideUnitCircle * GunType.Inacuracy;
-        Vector3 deviation = transform.right * randomCircle.x + transform.up * randomCircle.y;
-        Vector3 shootDirection = (transform.forward + deviation).normalized;
+        Vector2 randomCircle = Random.insideUnitCircle;
+        Quaternion spreadRotation = Quaternion.Euler(randomCircle.y * GunType.Inacuracy, randomCircle.x * GunType.Inacuracy, 0);
+        Vector3 shootDirection = spreadRotation * transform.forward;
 
         // Calculate spawn position and rotation
         Vector3 shootPosition = transform.position + transform.rotation * GunType.ShootOffset;
@@ -300,6 +301,7 @@ public class Gun : MonoBehaviour, IPickupable
                 continue;
 #if UNITY_EDITOR
             Debug.Log($"Bullet hit: {hit.collider.name} (Layer {hit.collider.gameObject.layer}) at {hit.point}");
+            DrawDebugRay(ray.origin, hit.point, Color.red, 3f);
 #endif
             // Apply damage
             if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable))
@@ -355,5 +357,27 @@ public class Gun : MonoBehaviour, IPickupable
 
         DrawCone(GunType.Inacuracy, Color.yellow);
     }
+
+    private void DrawDebugRay(Vector3 start, Vector3 end, Color color, float duration = 0.05f)
+    {
+        GameObject rayObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        Destroy(rayObj.GetComponent<Collider>()); // remove the collider so it doesn't interfere
+
+        // Position and scale
+        Vector3 dir = end - start;
+        float length = dir.magnitude;
+        rayObj.transform.position = start + dir / 2f;
+        rayObj.transform.rotation = Quaternion.LookRotation(dir);
+        rayObj.transform.localScale = new Vector3(0.01f, 0.01f, length);
+
+        // Material and color
+        var mat = new Material(Shader.Find("Unlit/Color"));
+        mat.color = color;
+        rayObj.GetComponent<MeshRenderer>().material = mat;
+
+        // Auto-cleanup
+        Destroy(rayObj, duration);
+    }
+
 #endif
 }

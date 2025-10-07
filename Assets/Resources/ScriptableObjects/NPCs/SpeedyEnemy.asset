@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WalkSpeed: 2.5
   RunSpeed: 5
-  Health: 3
+  Health: 2
   NavigationUpdateInterval: 1
   Player:
     serializedVersion: 2

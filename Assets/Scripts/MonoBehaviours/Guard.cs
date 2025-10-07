@@ -133,7 +133,7 @@ public class Guard : Enemy
         state = newState;
     }
 
-    new public void TakeDamage(int damage)
+    override public void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
         if (state == State.Idle)

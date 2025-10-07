@@ -84,7 +84,18 @@ public class Enemy : NPC, IAmmoHolder
     {
         gun.transform.SetParent(null, true);
         gun.Drop();
+        Debug.Log("Enemy died");
         base.Die();
+    }
+
+    override public void TakeDamage(int damage)
+    {
+        Debug.Log("Enemy took damage");
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Die();
+        }
     }
 
     // IAmmoHolder implementation. Since enemies have infinite ammo, these functions do nothing :-)
@@ -104,7 +115,7 @@ public class Enemy : NPC, IAmmoHolder
             Gizmos.color = new Color32(0, 0, 0, 0);
         else
             Gizmos.color = new Color32(255, 255, 0, 98);
-        Gizmos.DrawSphere(transform.position, enemyType.VisionRange);
+        //Gizmos.DrawSphere(transform.position, enemyType.VisionRange);
 
 
         // Draw vision viewport
