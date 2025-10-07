@@ -21,8 +21,7 @@ public class HealthPack : MonoBehaviour, IPickupable
     // Implement the IPickupable interface method
     public void Pickup(Transform picker)
     {
-        // Just debug log for now. :/
-        Debug.Log($"{picker.name} picked up a health pack!");
-        GameObject.Destroy(gameObject);
+        picker.GetComponent<IDamageable>()?.TakeDamage(-2);
+        Destroy(gameObject);
     }
 }
