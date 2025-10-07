@@ -7,8 +7,10 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
 {
     // ===== AMMO & WEAPON SYSTEM =====
     private Dictionary<BulletType, int> AmmoAmount = new();
-    public Gun Gun;
     public Grabber Grabber;
+    public Gun ActiveGun { get { return Guns[CurrentGunIndex]; } }
+    public Gun[] Guns = new Gun[2];
+    public int CurrentGunIndex = 0;
 
     [Header("UI Prompts")]
     [SerializeField] private TMPro.TextMeshProUGUI pickupPrompt;
@@ -28,11 +30,6 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
 
     void Start()
     {
-        // Debugging setup
-        Gun?.Pickup(transform);
-        if (Gun != null)
-            AmmoAmount[Gun.Type.BulletType] = 40;
-
         currentHealth = maxHealth;
 
         // Maak het rode overlay aan
@@ -42,13 +39,21 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
 
     void Update()
     {
-        // ===== INPUT HANDLING =====
-        if (Input.GetMouseButtonDown(0))
-            Gun?.StartShooting();
-        if (Input.GetMouseButtonUp(0))
-            Gun?.StopShooting();
-        if (Input.GetKeyDown(KeyCode.R))
-            Gun?.Reload();
+        if (ActiveGun != null)
+        {
+            if (Input.GetMouseButtonDown(0))
+                ActiveGun.StartShooting();
+            if (Input.GetMouseButtonUp(0))
+                ActiveGun.StopShooting();
+            if (Input.GetKeyDown(KeyCode.R))
+                ActiveGun.Reload();
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
+            SwitchGun(0);
+        if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
+            SwitchGun(1);
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+            SwitchGun(CurrentGunIndex + (Input.GetAxis("Mouse ScrollWheel") > 0 ? 1 : -1));
 
         // Pickup logic
         Grabber.Position = Camera.main.transform.position;
@@ -64,7 +69,24 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
                 FadeInPickupRoutine = StartCoroutine(FadeInPickupUi());
 
             if (Input.GetKeyDown(KeyCode.E))
+            {
                 pickupable.Pickup(transform);
+                // Check if the pickupable is a Gun
+                if (pickupable is Gun gun)
+                {
+                    // If we already have a gun in the current slot, drop it
+                    if (ActiveGun != null)
+                    {
+                        ActiveGun.transform.SetParent(null, true);
+                        ActiveGun.Drop();
+                    }
+                    // Equip the new gun
+                    Guns[CurrentGunIndex] = gun;
+                    gun.transform.SetParent(Camera.main.transform);
+                    gun.transform.localPosition = new Vector3(0.644f, -0.302f, 1.167f); // Hardcoded for now
+                    gun.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                }
+            }
         }
         else
         {
@@ -76,10 +98,6 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
             if (FadeOutPickupRoutine == null)
                 FadeOutPickupRoutine = StartCoroutine(FadeOutPickupUi());
         }
-
-        // Testdamage: toets H verlaagt health
-        if (Input.GetKeyDown(KeyCode.H))
-            TakeDamage(10);
     }
 
     // ===== DAMAGE SYSTEM =====
@@ -99,6 +117,14 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
     {
         Debug.Log("💀 Player is dead!");
         // Voeg hier respawn/game over toe
+    }
+
+    private void SwitchGun(int index)
+    {
+        if (index < 0 || index >= Guns.Length || index == CurrentGunIndex) return;
+        if (ActiveGun != null) ActiveGun.gameObject.SetActive(false);
+        CurrentGunIndex = index;
+        if (ActiveGun != null) ActiveGun.gameObject.SetActive(true);
     }
 
     // ===== OVERLAY LOGIC =====
