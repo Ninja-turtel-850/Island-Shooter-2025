@@ -3,7 +3,8 @@ using UnityEngine;
 public class Statistics : MonoBehaviour
 {
     private static Statistics _instance;
-    private Stats stats;
+    private static Stats stats;
+    private static bool initialized = false;
 
     private struct Stats
     {
@@ -12,7 +13,6 @@ public class Statistics : MonoBehaviour
         public int EnemiesKilled;
         public float timeTaken;
 
-        // Static method to initialize a Stats instance
         public static Stats CreateDefault()
         {
             return new Stats
@@ -31,14 +31,18 @@ public class Statistics : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = FindFirstObjectByType<Statistics>();
-                if (_instance == null)
+                GameObject singletonObject = new GameObject(nameof(Statistics));
+                _instance = singletonObject.AddComponent<Statistics>();
+                DontDestroyOnLoad(singletonObject);
+
+                if (!initialized)
                 {
-                    GameObject singletonObject = new GameObject(nameof(Statistics));
-                    _instance = singletonObject.AddComponent<Statistics>();
-                    DontDestroyOnLoad(singletonObject);
+                    stats = Stats.CreateDefault();
+                    stats.timeTaken = Time.time;
+                    initialized = true;
                 }
             }
+
             return _instance;
         }
     }
@@ -48,26 +52,56 @@ public class Statistics : MonoBehaviour
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
+            return;
         }
-        else if (_instance == this)
+
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        if (!initialized)
         {
-            DontDestroyOnLoad(gameObject);
+            stats = Stats.CreateDefault();
+            stats.timeTaken = Time.time;
+            initialized = true;
         }
-        stats = Stats.CreateDefault();
-        stats.timeTaken = Time.time;
     }
 
-    public void IncrementHostagesDied() => stats.HostagesDied++;
-    public void IncrementHostagesRescued() => stats.HostagesRescued++;
-    public void IncrementEnemiesKilled() => stats.EnemiesKilled++;
-    public void CalculateTimeTaken() => stats.timeTaken = Time.time - stats.timeTaken;
+    public void IncrementHostagesDied()
+    {
+        stats.HostagesDied++;
+        Debug.Log($"HostagesDied incremented: {stats.HostagesDied}");
+    }
+
+    public void IncrementHostagesRescued()
+    {
+        stats.HostagesRescued++;
+        Debug.Log($"HostagesRescued incremented: {stats.HostagesRescued}");
+    }
+
+    public void IncrementEnemiesKilled()
+    {
+        stats.EnemiesKilled++;
+        Debug.Log($"EnemiesKilled incremented: {stats.EnemiesKilled}");
+    }
+
+    public void CalculateTimeTaken()
+    {
+        stats.timeTaken = Time.time - stats.timeTaken;
+    }
 
     public int GetHostagesDied() => stats.HostagesDied;
     public int GetHostagesRescued() => stats.HostagesRescued;
     public int GetEnemiesKilled() => stats.EnemiesKilled;
     public float GetTimeTaken() => stats.timeTaken;
+
     public (int HostagesDied, int HostagesRescued, int EnemiesKilled, float timeTaken) GetStats()
     {
         return (stats.HostagesDied, stats.HostagesRescued, stats.EnemiesKilled, stats.timeTaken);
+    }
+
+    public void ResetStats()
+    {
+        stats = Stats.CreateDefault();
+        stats.timeTaken = Time.time;
     }
 }

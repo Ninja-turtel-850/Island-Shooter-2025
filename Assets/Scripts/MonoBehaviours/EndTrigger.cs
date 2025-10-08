@@ -10,6 +10,7 @@ public class EndTrigger : MonoBehaviour, IPickupable
         // Count hostages in range
         foreach (var hostage in FindObjectsByType<Hostage>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
         {
+            Debug.Log($"Hostage at {hostage.transform.position}, in range: {hostageCountingCollider.bounds.Contains(hostage.transform.position)}");
             if (hostageCountingCollider.bounds.Contains(hostage.transform.position))
             {
                 Statistics.Instance.IncrementHostagesRescued();
