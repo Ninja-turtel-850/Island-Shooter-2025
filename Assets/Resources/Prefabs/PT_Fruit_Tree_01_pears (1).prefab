@@ -52,6 +52,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PT_Fruit_Tree_01_pears (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: ab5654911e4a8494190af9551d81ea81, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.39949128
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: ab5654911e4a8494190af9551d81ea81, type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.19547738
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: ab5654911e4a8494190af9551d81ea81, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.026408123
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
