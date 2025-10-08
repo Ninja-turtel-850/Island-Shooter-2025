@@ -117,6 +117,8 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
     {
         Debug.Log("💀 Player is dead!");
         // Voeg hier respawn/game over toe
+        SceneSwitcher sceneSwitcher = gameObject.AddComponent<SceneSwitcher>();
+        sceneSwitcher.LoadSceneByName("Death");
     }
 
     private void SwitchGun(int index)
