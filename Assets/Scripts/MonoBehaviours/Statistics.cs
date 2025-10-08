@@ -61,4 +61,13 @@ public class Statistics : MonoBehaviour
     public void IncrementHostagesRescued() => stats.HostagesRescued++;
     public void IncrementEnemiesKilled() => stats.EnemiesKilled++;
     public void CalculateTimeTaken() => stats.timeTaken = Time.time - stats.timeTaken;
+
+    public int GetHostagesDied() => stats.HostagesDied;
+    public int GetHostagesRescued() => stats.HostagesRescued;
+    public int GetEnemiesKilled() => stats.EnemiesKilled;
+    public float GetTimeTaken() => stats.timeTaken;
+    public (int HostagesDied, int HostagesRescued, int EnemiesKilled, float timeTaken) GetStats()
+    {
+        return (stats.HostagesDied, stats.HostagesRescued, stats.EnemiesKilled, stats.timeTaken);
+    }
 }
