@@ -19,6 +19,9 @@ public class EndTrigger : MonoBehaviour, IPickupable
 
         Statistics.Instance.CalculateTimeTaken();
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         SceneSwitcher sceneSwitcher = gameObject.AddComponent<SceneSwitcher>();
         sceneSwitcher.LoadSceneByName("Win");
     }

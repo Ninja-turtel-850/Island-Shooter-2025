@@ -30,6 +30,7 @@ public class Gun : MonoBehaviour, IPickupable
     private Rigidbody gunRigidbody;                         // Rigidbody for the gun, used for physics
 
     public GunType Type { get { return GunType; } }
+    public int Ammo { get { return CurrentAmmo; } }
 
     private void Awake()
     {

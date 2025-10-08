@@ -28,6 +28,12 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
     [SerializeField] private float startOverlayAlpha = 0.3f; // rood bij start
     private Image damageOverlay;
 
+    // GUI shit
+    [Header("HUD")]
+    [SerializeField] private TMPro.TextMeshProUGUI bulletAmountText;
+    [SerializeField] private TMPro.TextMeshProUGUI bulletMaxText;
+    [SerializeField] private TMPro.TextMeshProUGUI bulletInventoryText;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -98,6 +104,20 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
             if (FadeOutPickupRoutine == null)
                 FadeOutPickupRoutine = StartCoroutine(FadeOutPickupUi());
         }
+
+        // Update HUD
+        if (ActiveGun != null)
+        {
+            bulletAmountText.text = ActiveGun.Ammo.ToString();
+            bulletMaxText.text = ActiveGun.Type.AmmoCapacity.ToString();
+            bulletInventoryText.text = GetAmmo(ActiveGun.Type.BulletType).ToString();
+        }
+        else
+        {
+            bulletAmountText.text = "-";
+            bulletMaxText.text = "-";
+            bulletInventoryText.text = "-";
+        }
     }
 
     // ===== DAMAGE SYSTEM =====
@@ -119,6 +139,9 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
         // Voeg hier respawn/game over toe
         SceneSwitcher sceneSwitcher = gameObject.AddComponent<SceneSwitcher>();
         sceneSwitcher.LoadSceneByName("Death");
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void SwitchGun(int index)

@@ -5,9 +5,17 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float walkSpeed = 6f;
-    public float maxSpeed = 12f;
-    public float groundDrag = 5f;
+    public float walkSpeed = 1.5f;
+    public float maxSpeed = 3f;
+    public float groundDrag = 2.5f;
+
+    [Header("Sprint Settings")]
+    public float sprintMultiplier = 4f;
+    public KeyCode sprintKey = KeyCode.LeftShift;
+
+    [Header("Slow Walk Settings")]
+    public float slowWalkMultiplier = 0.25f;
+    public KeyCode slowWalkKey = KeyCode.LeftControl;
 
     [Header("Jump Settings")]
     public float jumpForce = 8f;
@@ -19,15 +27,17 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ground Check")]
     public float playerHeight = 2f;
-    public float groundCheckDistance = 0.4f; // Increased for better detection
+    public float groundCheckDistance = 0.4f;
     public LayerMask whatIsGround;
-    
+
     [Header("References")]
     public Transform orientation;
 
     // Private variables
     private bool grounded;
     private bool readyToJump = true;
+    private bool isSprinting;
+    private bool isSlowWalking;
     private float horizontalInput;
     private float verticalInput;
     private Vector3 moveDirection;
@@ -43,14 +53,18 @@ public class PlayerMovement : MonoBehaviour
     {
         // Ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + groundCheckDistance, whatIsGround);
-        
-        // Visualize ground check in Scene view
+
+        // Visualize ground check
         Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + groundCheckDistance), Color.red);
-        
+
         // Get input
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        
+
+        // Sprint and slow-walk checks
+        isSprinting = Input.GetKey(sprintKey) && grounded && !Input.GetKey(slowWalkKey);
+        isSlowWalking = Input.GetKey(slowWalkKey) && grounded && !Input.GetKey(sprintKey);
+
         // Handle jump input
         if (Input.GetKeyDown(jumpKey))
         {
@@ -61,8 +75,8 @@ public class PlayerMovement : MonoBehaviour
                 Invoke(nameof(ResetJump), jumpCooldown);
             }
         }
-        
-        // Handle drag - FIXED: rb.drag instead of rb.linearDamping
+
+        // Apply drag
         rb.linearDamping = grounded ? groundDrag : 0;
     }
 
@@ -76,29 +90,38 @@ public class PlayerMovement : MonoBehaviour
     {
         // Calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        
+
+        // Determine current speed based on state
+        float currentSpeed = walkSpeed;
+        if (isSprinting) currentSpeed = walkSpeed * sprintMultiplier;
+        else if (isSlowWalking) currentSpeed = walkSpeed * slowWalkMultiplier;
+
         // Apply force
         float forceMultiplier = grounded ? 10f : 10f * airMultiplier;
-        rb.AddForce(moveDirection.normalized * walkSpeed * forceMultiplier, ForceMode.Force);
+        rb.AddForce(moveDirection.normalized * currentSpeed * forceMultiplier, ForceMode.Force);
     }
 
     private void SpeedControl()
     {
-        // Limit horizontal speed - FIXED: rb.velocity instead of rb.linearVelocity
+        // Limit horizontal speed
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        
-        if (flatVel.magnitude > maxSpeed)
+
+        float currentMaxSpeed = maxSpeed;
+        if (isSprinting) currentMaxSpeed = maxSpeed * sprintMultiplier;
+        else if (isSlowWalking) currentMaxSpeed = maxSpeed * slowWalkMultiplier;
+
+        if (flatVel.magnitude > currentMaxSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * maxSpeed;
+            Vector3 limitedVel = flatVel.normalized * currentMaxSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
 
     private void Jump()
     {
-        // Reset y velocity for consistent jump height - FIXED: rb.velocity
+        // Reset y velocity for consistent jump height
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        
+
         // Apply jump force
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
