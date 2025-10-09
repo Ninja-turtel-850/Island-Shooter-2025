@@ -261,6 +261,7 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
     }
 
     // ===== DEBUG GUI =====
+#if UNITY_EDITOR
     void OnGUI()
     {
         int y = 10;
@@ -278,4 +279,5 @@ public class TestPlayer : MonoBehaviour, IAmmoHolder, IDamageable
 
         GUI.Box(new Rect(10, y, 200, 30), $"Health: {currentHealth}", style);
     }
+#endif
 }
