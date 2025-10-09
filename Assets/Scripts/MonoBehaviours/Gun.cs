@@ -93,6 +93,7 @@ public class Gun : MonoBehaviour, IPickupable
             GunAudio.maxDistance = 50;
             GunAudio.volume = 1;
             GunAudio.loop = false;
+            GunAudio.rolloffMode = AudioRolloffMode.Linear;
         }
         else
             Debug.LogWarning("GunType FireSFX and ReloadSFX are not set, no gun sounds will be played");

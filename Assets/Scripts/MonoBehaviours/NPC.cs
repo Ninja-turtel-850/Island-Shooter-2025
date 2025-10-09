@@ -21,7 +21,8 @@ public class NPC : MonoBehaviour, IDamageable
     {
         Health = NpcType.Health;
         Speed = NpcType.WalkSpeed;
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (Player == null)
+            Player = GameObject.FindGameObjectWithTag("Player").transform;
 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;

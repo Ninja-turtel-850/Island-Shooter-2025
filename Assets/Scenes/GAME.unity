@@ -1222,6 +1222,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patroler (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6386740546756655085, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
+      propertyPath: GunType
+      value: 
+      objectReference: {fileID: 11400000, guid: 57a55702254fe584fb1b1b3e6385d46a, type: 2}
+    - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 2
@@ -1887,7 +1895,6 @@ GameObject:
   m_Component:
   - component: {fileID: 119013028}
   - component: {fileID: 119013027}
-  - component: {fileID: 119013026}
   - component: {fileID: 119013025}
   m_Layer: 0
   m_Name: CutCam
@@ -1940,14 +1947,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &119013026
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119013024}
-  m_Enabled: 1
 --- !u!20 &119013027
 Camera:
   m_ObjectHideFlags: 0
@@ -2308,6 +2307,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2476,7 +2479,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2638,6 +2641,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3853,6 +3860,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5511,6 +5522,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5660,6 +5675,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5342398305293033168, guid: 37e4c4f851124974c94071723d68de92, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6422,6 +6441,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6d063932906942f439b5997ac74c2f5d, type: 2}
     - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
+    - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
       propertyPath: currentPatrolIndex
       value: 5
       objectReference: {fileID: 0}
@@ -6915,6 +6938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pieter
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7099,6 +7126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10134,6 +10165,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10171,7 +10206,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -10197,7 +10232,7 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9
+      time: 0.6
       value: 1
       inSlope: 0
       outSlope: 0
@@ -10222,7 +10257,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -10271,7 +10306,7 @@ Transform:
   m_GameObject: {fileID: 567131675}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 546, y: -446, z: 371}
+  m_LocalPosition: {x: 546, y: -300, z: 279}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10622,7 +10657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11847,6 +11882,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5342398305293033168, guid: 37e4c4f851124974c94071723d68de92, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11962,6 +12001,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13291,6 +13334,10 @@ PrefabInstance:
       value: Guard (16)
       objectReference: {fileID: 0}
     - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
       propertyPath: MaxTurnAngle
       value: 10
       objectReference: {fileID: 0}
@@ -14613,6 +14660,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15038,7 +15089,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16733,6 +16784,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5342398305293033168, guid: 37e4c4f851124974c94071723d68de92, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16925,6 +16980,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patroler
       objectReference: {fileID: 0}
+    - target: {fileID: 6386740546756655085, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
+      propertyPath: GunType
+      value: 
+      objectReference: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
+    - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 4
@@ -21101,6 +21164,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5342398305293033168, guid: 37e4c4f851124974c94071723d68de92, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22750,6 +22817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22811,6 +22882,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
       propertyPath: MaxTurnAngle
       value: 10
@@ -24206,6 +24281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24447,6 +24526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jeff
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24468,6 +24551,10 @@ PrefabInstance:
       propertyPath: GunType
       value: 
       objectReference: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
+    - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
       propertyPath: looping
       value: 0
@@ -25836,6 +25923,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26461,6 +26552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27473,7 +27568,11 @@ PrefabInstance:
     - target: {fileID: 6386740546756655085, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
       propertyPath: GunType
       value: 
-      objectReference: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
+      objectReference: {fileID: 11400000, guid: 7ced5c1e2b188464faeb4b27ba49562a, type: 2}
+    - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 5
@@ -27883,6 +27982,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bas
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28292,6 +28395,10 @@ PrefabInstance:
       propertyPath: GunType
       value: 
       objectReference: {fileID: 11400000, guid: 6d063932906942f439b5997ac74c2f5d, type: 2}
+    - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 9
@@ -28838,6 +28945,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -29113,7 +29224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -29900,6 +30011,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6d063932906942f439b5997ac74c2f5d, type: 2}
     - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
+    - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 7
       objectReference: {fileID: 0}
@@ -30198,6 +30313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30259,6 +30378,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33083,6 +33206,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33405,6 +33532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jan
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33701,6 +33832,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35333,6 +35468,10 @@ PrefabInstance:
       value: Patroler (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
+    - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
       propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
@@ -35699,6 +35838,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 9075294493112745595, guid: 777cf828c1e39e348b27675d9c354a21, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37326,6 +37469,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5342398305293033168, guid: 37e4c4f851124974c94071723d68de92, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1120700275}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

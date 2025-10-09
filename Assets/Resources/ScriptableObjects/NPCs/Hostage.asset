@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ce0fa3fbc2eae4c9bf2ec006dc7e36, type: 3}
   m_Name: Hostage
   m_EditorClassIdentifier: 
-  WalkSpeed: 2
-  RunSpeed: 4
+  WalkSpeed: 6
+  RunSpeed: 6
   Health: 5
-  NavigationUpdateInterval: 1
+  NavigationUpdateInterval: 0.5
+  Player:
+    serializedVersion: 2
+    m_Bits: 64
