@@ -19268,7 +19268,7 @@ Transform:
   m_GameObject: {fileID: 1120700271}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 641.9, y: 74.1, z: 789.4}
+  m_LocalPosition: {x: 728.62, y: 20.8, z: 218.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27745,7 +27745,6 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1120700275}
-      objectReference: {fileID: 11400000, guid: 92143812cc6c1e5408a29cd9be2428ba, type: 2}
     - target: {fileID: 6657587557374596552, guid: 6bb84565c939a64419a014f33d52a6ed, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 5

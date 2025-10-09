@@ -41,6 +41,9 @@ public class EndTrigger : MonoBehaviour, IPickupable
         // Wacht tot animatie klaar is
         yield return new WaitForSeconds(animationDuration);
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         // Laad de Win-scene
         SceneSwitcher sceneSwitcher = gameObject.AddComponent<SceneSwitcher>();
         sceneSwitcher.LoadSceneByName("Win");
